@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-pt">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Musicfy - Adicionar Música</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/adicionar_musica.css' %}">
+</head>
+
+<body>
+    <div class="back-button">
+        <form method="POST" action="{% url 'index' %}">
+            {% csrf_token %}
+            <button type="submit" class="btn back-button-style">Voltar</button>
+        </form>
+    </div>
+
+    <div class="logout-button">
+        <form method="POST" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit" class="btn logout-button-style">Logout</button>
+        </form>
+    </div>
+
+    <div class="brand">Musicfy</div>
+
+    <div class="container">
+        <h1>Adicionar Música</h1>
+
+        <div class="messages">
+            {% if status == 'error' and errors %}
+                {% for error in errors %}
+                    <div class="message error">{{ error }}</div>
+                {% endfor %}
+            {% elif status == 'success' %}
+                <div class="message success">Musica registada com sucesso!</div>
+            {% endif %}
+        </div>
+
+        <form method="POST" action="{% url 'adicionar_musica' %}">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label>Título:</label>
+                <input type="text" name="titulo" placeholder="Digite o título da música" required>
+            </div>
+
+            <div class="form-group">
+                <label>Género:</label>
+                <input type="text" name="genero" placeholder="Digite o gênero da música" required>
+            </div>
+
+            <div class="form-group">
+                <label>Duração (min:seg):</label>
+                <input type="time" step="1" id="duracao" name="duracao" required>
+            </div>
+
+            <div class="form-group">
+                <label>Feat:</label>
+                <select id="feat-select" class="styled-select" required onchange="toggleArtistasConvidados()">
+                    <option value="" disabled selected>Selecione uma opção</option>
+                    <option value="nao">Não</option>
+                    <option value="sim">Sim</option>
+                </select>
+            </div>
+
+            <div class="form-group" id="artistas-convidados-div" style="display: none;">
+                <label>Artistas Convidados:</label>
+                <select class="styled-select" name="artistas_participantes" multiple>
+                    {% for artista in artistas %}
+                        {% if artista.utilizador_user_id != usuario %}
+                            <option value="{{ artista.utilizador_user_id }}">{{ artista.nome_artistico }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+                <p class="small-text">Segure CTRL (ou CMD no Mac) para selecionar múltiplos artistas.</p>
+            </div>
+
+            <button type="submit" class="btn">Adicionar Música</button>
+        </form>
+    </div>
+
+    <script src="{% static 'js/adicionar_musica.js' %}"></script>
+</body>
+
+</html>

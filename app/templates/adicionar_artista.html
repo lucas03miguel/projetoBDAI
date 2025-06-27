@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-pt">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Musicfy - Registar artista</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/adicionar_artista.css' %}">
+</head>
+
+<body>
+    <div class="back-button">
+        <form method="POST" action="{% url 'index' %}">
+            {% csrf_token %}
+            <button type="submit" class="btn back-button-style">Voltar</button>
+        </form>
+    </div>
+
+    <div class="logout-button">
+        <form method="POST" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit" class="btn logout-button-style">Logout</button>
+        </form>
+    </div>
+
+    <div class="brand">Musicfy</div>
+
+    <div class="container">
+        <h1>Registo de artista</h1>
+        
+        <div class="messages">
+            {% if status == 'error' and errors %}
+                {% for error in errors %}
+                    <div class="message error">{{ error }}</div>
+                {% endfor %}
+            {% elif status == 'success' %}
+                <div class="message success">Artista registado com sucesso!</div>
+            {% endif %}
+        </div>       
+        
+        <form action="{% url 'adicionar_artista' %}" method="POST">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                <label for="mail">Email:</label>
+                <input 
+                  type="email"
+                  name="mail"
+                  placeholder="Insira o email"
+                  required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input 
+                  type="password"
+                  name="password"
+                  placeholder="Insira a password"
+                  required
+                >
+            </div>
+
+            <div class="form-group">
+                <label>Nome:</label>
+                <input 
+                  type="text"
+                  name="nome"
+                  placeholder="Insira o nome"
+                  required
+                >
+            </div>
+
+            <div class="form-group">
+                <label>Nome artístico:</label>
+                <input 
+                  type="text"
+                  name="nome_artistico"
+                  placeholder="Insira o nome artístico"
+                  required
+                >
+            </div>
+
+            <div class="form-group">
+                <label>País de origem:</label>
+                <input 
+                  type="text"
+                  name="pais_origem" 
+                  placeholder="Insira o país de origem"
+                  required
+                >
+            </div>
+
+            <div class="form-group">
+                <label>Idade:</label>
+                <input 
+                  type="number"
+                  name="idade" 
+                  placeholder="Insira a idade"
+                  required
+                >
+            </div>
+
+            <div class="form-group">
+                <label>Morada:</label>
+                <input 
+                  type="text"
+                  name="morada" 
+                  placeholder="Insira a morada"
+                  required
+                >
+            </div>
+
+            <button type="submit" class="btn">Registar</button>
+        </form>
+    </div>  
+</body>
+</html>

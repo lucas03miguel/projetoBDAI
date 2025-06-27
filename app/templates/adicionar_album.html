@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-pt">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Musicfy - Criar Álbum</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/adicionar_album.css' %}">
+
+</head>
+
+<body>
+    <div class="back-button">
+        <form method="POST" action="{% url 'index' %}">
+            {% csrf_token %}
+            <button type="submit" class="btn back-button-style">Voltar</button>
+        </form>
+    </div>
+
+    <div class="logout-button">
+        <form method="POST" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit" class="btn logout-button-style">Logout</button>
+        </form>
+    </div>
+
+    <div class="brand">Musicfy</div>
+
+    <div class="container">
+        <h1>Adicionar Álbum</h1>
+        <form method="POST" action="{% url 'adicionar_album' %}">
+            {% csrf_token %}
+            <div class="messages">
+                {% if status == 'error' and errors %}
+                    {% for error in errors %}
+                        <div class="message error">{{ error }}</div>
+                    {% endfor %}
+                {% elif status == 'success' %}
+                    <div class="message success">Álbum registado com sucesso!</div>
+                {% endif %}
+            </div>
+            
+            <div class="form-group">
+                <label>Nome do Álbum:</label>
+                <input type="text" name="nome_album" placeholder="Digite o nome do álbum" required>
+            </div>
+
+            <div class="form-group">
+                <label>Número de Músicas:</label>
+                <input type="number" id="numero-musicas" name="numero_musicas" 
+                    placeholder="Digite o número de músicas" min="2" required onchange="gerarCamposMusicas()">
+            </div>
+
+            <div id="musicas-container"></div>
+
+            <button type="submit" class="btn">Adicionar Álbum</button>
+        </form>
+    </div>
+
+    
+    <script id="discografia-data" type="application/json">
+        {{ discografia|safe }}
+    </script>    
+    <script src="{% static 'js/adicionar_album.js' %}"></script>
+</body>
+
+</html>

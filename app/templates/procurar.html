@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Musicfy - Procurar</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/procurar.css' %}">
+</head>
+<body>
+    <div class="back-button">
+        <form method="POST" action="{% url 'index' %}">
+            {% csrf_token %}
+            <button type="submit" class="btn back-button-style">Voltar</button>
+        </form>
+    </div>
+
+    <div class="logout-button">
+        <form method="POST" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit" class="btn logout-button-style">Logout</button>
+        </form>
+    </div>
+
+    <div class="brand">Musicfy</div>
+
+    <div class="main-container">
+        <div class="container">
+            <h1>Encontre o que procura</h1>
+
+            <form method="GET" action="{% url 'procurar' %}">
+                <div class="form-group">
+                    <label for="pesquisa">Palavra-chave</label>
+                    <input type="text" id="pesquisa" name="q" placeholder="Digite uma palavra-chave" value="{{ query|default:'' }}" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Escolha o filtro</label>
+                    <select id="filtro" name="filtro" class="styled-select" required>
+                        <option value="">Selecione o filtro</option>
+                        <option value="tudo">Tudo</option>
+                        <option value="artistas">Artistas</option>
+                        <option value="musicas">Músicas</option>
+                        <option value="playlists">Playlists</option>
+                        <option value="albuns">Álbuns</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn-pesquisar">Pesquisar</button>
+            </form>
+
+            <div id="resultados" class="resultados-container">
+                {% if resultados %}
+                    <ul>
+                        {% for resultado in resultados %}
+                            <li class="item">
+                                {% if resultado.tipo == 'Artista' %}
+                                    <a href="?user_id={{ resultado.id }}">{{ resultado.nome }}</a>
+                                {% elif resultado.tipo == 'Álbum' %}
+                                    <a href="?album_id={{ resultado.id }}">{{ resultado.nome }}</a>
+                                {% elif resultado.tipo == 'Música' %}
+                                    <a href="?musica_id={{ resultado.id }}">{{ resultado.nome }}</a>
+                                {% elif resultado.tipo == 'Playlist' %}
+                                    <a href="?playlist_id={{ resultado.id }}">{{ resultado.nome }}</a>
+                                {% endif %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p id="resultados-pesquisa" style="display: none;">Nenhum resultado encontrado.</p>
+                {% endif %}
+            </div>
+        </div>
+
+        {% if artista_selecionado %}
+            <div class="container">
+                <h2>Informações do Artista</h2>
+                <p>Nome Artístico: {{ artista_selecionado.nome_artistico }}</p>
+                <p>País de Origem: {{ artista_selecionado.pais_origem }}</p>
+                <p>Número de Álbuns: {{ num_albuns }}</p>
+                <p>Número de Músicas: {{ num_musicas }}</p>
+            </div>
+        {% elif musica_selecionada %}
+            <div class="container">
+                <h2>Informações da Música</h2>
+                <p>Título: {{ musica_selecionada.titulo }}</p>
+                <p>Género: {{ musica_selecionada.genero }}</p>
+                <p>Duração: {{ musica_selecionada.duracao }}</p>
+                <p>Data de lançamento: {{ musica_selecionada.release_date }}</p>
+                <p>Artista: {{ nome_artista }}</p>
+
+                <form method="GET" action="{% url 'procurar' %}">
+                    <input type="hidden" name="musica_id" value="{{ musica_selecionada.ismn }}">
+                    <input type="hidden" name="musica_id_reproduzir" value="{{ musica_selecionada.ismn }}">
+                    <button type="submit" class="reproduzir-button">Reproduzir</button>
+                </form>
+                
+                <div class="messages">
+                    {% if status == 'success' %}
+                        <div class="message success">{{ results }}</div>
+                    {% endif %}
+                </div>
+            </div>
+        {% elif album_selecionado %}
+            <div class="container">
+                <h2>Informações do Álbum</h2>
+                <p>Título: {{ album_selecionado.titulo }}</p>
+                <p>Data de Lançamento: {{ album_selecionado.release_date }}</p>
+                <p>Artista: {{ album_selecionado.artista_utilizador_user.nome_artistico }}</p>
+                <p>Número de músicas: {{ numero_musicas }}</p>
+                <p>Duração do álbum: {{ duracao }}</p>
+
+                <form method="GET" action="{% url 'procurar' %}">
+                    <input type="hidden" name="album_id" value="{{ album_selecionado.id}}">
+                    <input type="hidden" name="album_id_reproduzir" value="{{ album_selecionado.id }}">
+                    <button type="submit" class="reproduzir-button">Reproduzir</button>
+                </form>
+                
+                <div class="messages">
+                    {% if status == 'success' %}
+                        <div class="message success">{{ results }}</div>
+                    {% endif %}
+                </div>
+            </div>
+        {% elif playlist_selecionada %}
+            <div class="container">
+                <h2>Informações da Playlist</h2>
+                <p>Nome: {{ playlist_selecionada.nome }}</p>
+                <p>Data de Criação: {{ playlist_selecionada.data_criacao }}</p>
+                <p>Número de Músicas: {{ numero_musicas }}</p>
+                <p>Duração da playlist: {{ duracao }}</p>
+
+                <form method="GET" action="{% url 'procurar' %}">
+                    <input type="hidden" name="playlist_id" value="{{ playlist_selecionada.playlist_id}}">
+                    <input type="hidden" name="playlist_id_reproduzir" value="{{ playlist_selecionada.playlist_id }}">
+                    <button type="submit" class="reproduzir-button">Reproduzir</button>
+                </form>
+                
+                <div class="messages">
+                    {% if status == 'success' %}
+                        <div class="message success">{{ results }}</div>
+                    {% endif %}
+                </div>
+            </div>
+        {% endif %}
+    </div>
+
+    <script src="{% static 'js/procurar.js' %}"></script>
+</body>
+</html>

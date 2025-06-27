@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-pt">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Musicfy - Registo</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/registo.css' %}">
+</head>
+
+<body>
+    <div class="brand">Musicfy</div>
+
+    <div class="container">
+        <h1>Registo</h1>
+        
+        <div class="messages">
+            {% if status == 'error' and errors %}
+                {% for error in errors %}
+                    <div class="message error">{{ error }}</div>
+                {% endfor %}
+            {% elif status == 'success' %}
+                <div class="message success">Registo efetuado com sucesso!</div>
+            {% endif %}
+        </div>
+
+        <form action="{% url 'registo' %}" method="POST">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                <label for="mail">Email:</label>
+                <input type="email" name="mail" placeholder="Insira o email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" name="password" placeholder="Insira a password" required>
+            </div>
+              
+
+            <div class="form-group">
+                <label for="nome">Nome:</label>
+                <input type="text" name="nome" placeholder="Insira o nome">
+            </div>
+
+            <div class="form-group">
+                <label for="idade">Idade:</label>
+                <input type="number" name="idade" min="1" placeholder="Insira a idade">
+            </div>
+
+            <div class="form-group">
+                <label for="morada">Morada:</label>
+                <input type="text" name="morada" placeholder="Insira a morada">
+            </div>
+
+            <button type="submit" class="btn">Registar</button>
+        </form>
+
+        <div class="link">
+            <p>Já tem uma conta? <a href="{% url 'login' %}">Faça login</a>.</p>
+        </div>
+    </div> 
+</body>
+</html>

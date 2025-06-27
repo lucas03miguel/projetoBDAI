@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-pt">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bem vindo ao Musicfy</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
+</head>
+
+<body>
+    <div class="logout-button">
+        <form method="POST" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit" class="btn logout-button-style">Logout</button>
+        </form>
+    </div>
+
+    <div class="brand">Musicfy</div>
+
+    <div class="container">
+        <h1>Bem-vindo/a ao Musicfy, {{ nome }}</h1>
+
+        <p>O nosso sistema contém os seguintes dados:</p>
+        <ul class="estatisticas">
+            <li>{{ num_artistas }} artista{{ num_artistas|pluralize:"s" }} registado{{ num_artistas|pluralize:"s" }}.</li>
+            <li>{{ num_consumidores }} consumidor{{ num_consumidores|pluralize:"es" }} registado{{ num_consumidores|pluralize:"s" }}.</li>
+            <li>{{ num_administradores }} administrador{{ num_administradores|pluralize:"es" }} registado{{ num_administradores|pluralize:"s" }}.</li>
+            <li>{{ num_musicas }} música{{ num_musicas|pluralize:"s" }} disponível{{ num_musicas|pluralize:"s" }}.</li>
+            <li>{{ num_playlists }} playlist{{ num_playlists|pluralize:"s" }} criada{{ num_playlists|pluralize:"s" }}.</li>
+            <li>{{ num_albuns }} álbum{{ num_albuns|pluralize:"s" }} lançado{{ num_albuns|pluralize:"s" }}.</li>
+            <li>{{ num_reproducoes }} reproduç{{ num_reproducoes|pluralize:"ão,ões" }} registada{{ num_reproducoes|pluralize:"s" }}.</li>
+        </ul>
+
+
+        <!-- Navegação -->
+        <h2>Navegue pelo sistema:</h2>
+        <div>
+            <div class="btn-group">
+                {% if type == 'consumidor' %}
+                    <a style="text-decoration: none;" href="{% url 'procurar' %}" class="btn">
+                        Procurar
+                        <img src="{% static 'img/procurar.png' %}" alt="Procurar" class="procurar-icon">
+                    </a>
+                    <a style="text-decoration: none;" href="{% url 'adicionar_playlist' %}" class="btn">
+                        Criar Playlist
+                        <img src="{% static 'img/adicionar.png' %}" alt="Adicionar" class="adicionar-icon">
+                    </a>
+                    <a style="text-decoration: none;" href="{% url 'top10' %}" class="btn">
+                        Top 10
+                        <img src="{% static 'img/top10.png' %}" alt="Top10" class="top10-icon">
+                    </a>
+                    <a style="text-decoration: none;" href="{% url 'minhas_playlists' %}" class="btn">
+                        Minhas Playlists
+                        <img src="{% static 'img/playlist.png' %}" alt="Playlist" class="playlist-icon">
+                    </a>
+                {% endif %}
+
+                {% if type == 'artista' %}
+                    <a style="text-decoration: none;" href="{% url 'adicionar_musica' %}" class="btn">
+                        Adicionar Música
+                        <img src="{% static 'img/adicionar.png' %}" alt="Adicionar" class="adicionar-icon">
+                    </a>
+                    <a style="text-decoration: none;" href="{% url 'adicionar_album' %}" class="btn">
+                        Adicionar Álbum
+                        <img src="{% static 'img/adicionar.png' %}" alt="Adicionar" class="adicionar-icon">
+                    </a>
+                {% endif %}
+
+                {% if type == 'administrador' %}
+                    <a style="text-decoration: none;" href="{% url 'adicionar_artista' %}" class="btn">
+                        Criar Artista
+                        <img src="{% static 'img/adicionar.png' %}" alt="Adicionar" class="adicionar-icon">
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

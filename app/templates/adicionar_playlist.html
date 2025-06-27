@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-pt">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Musicfy - Criar Playlist</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/adicionar_playlist.css' %}">
+</head>
+
+<body>
+    <div class="back-button">
+        <form method="POST" action="{% url 'index' %}">
+            {% csrf_token %}
+            <button type="submit" class="btn back-button-style">Voltar</button>
+        </form>
+    </div>
+
+    <div class="logout-button">
+        <form method="POST" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit" class="btn logout-button-style">Logout</button>
+        </form>
+    </div>
+
+    <div class="brand">Musicfy</div>
+
+    <div class="container">
+        <h1>Adicionar Playlist</h1>
+
+        <div class="messages">
+            {% if status == 'error' and errors %}
+                {% for error in errors %}
+                    <div class="message error">{{ error }}</div>
+                {% endfor %}
+            {% elif status == 'success' %}
+                <div class="message success">Playlist criada com sucesso!</div>
+            {% endif %}
+        </div>
+
+        <form method="POST" action="{% url 'adicionar_playlist' %}">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                <label>Título da Playlist:</label>
+                <input 
+                    type="text"
+                    name="titulo"
+                    placeholder="Insira o título da playlist"
+                    required>
+            </div>
+
+            <div class="form-group">
+                <label>Pesquisar Músicas:</label>
+                <div class="pesquisa-container">
+                    <input 
+                        type="text" 
+                        id="pesquisa-musicas" 
+                        placeholder="Insira palavra-chave da música" 
+                        autocomplete="off" 
+                        oninput="pesquisarMusicas()">
+                </div>
+            </div>
+
+            <div id="resultados-pesquisa" class="resultados-pesquisa">
+                <!-- As músicas encontradas aparecerão aqui -->
+            </div>
+            
+            <div class="form-group">
+                <label>Músicas da Playlist:</label>
+                <div id="lista-musicas" class="lista-musicas">
+                    <!-- As músicas adicionadas serão exibidas aqui -->
+                </div>
+            </div>
+
+            <input type="hidden" name="musicas" id="musicas-selecionadas" value="">
+
+            <button type="submit" class="btn">Criar Playlist</button>
+        </form>
+    </div>
+
+    <script src="{% static 'js/adicionar_playlist.js' %}"></script>
+</body>
+</html>

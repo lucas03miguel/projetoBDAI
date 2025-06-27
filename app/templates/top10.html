@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Musicfy - Top 10</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/top10.css' %}">
+</head>
+<body>
+    <div class="back-button">
+        <form method="POST" action="{% url 'index' %}">
+            {% csrf_token %}
+            <button type="submit" class="btn back-button-style">Voltar</button>
+        </form>
+    </div>
+
+    <div class="logout-button">
+        <form method="POST" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit" class="btn logout-button-style">Logout</button>
+        </form>
+    </div>
+
+    <div class="brand">Musicfy</div>
+    
+    <div class="messages">
+        {% if status == 'error' and errors %}
+            {% for error in errors %}
+                <div class="message error">{{ error }}</div>
+            {% endfor %}
+        {% elif status == 'success' %}
+            <div class="message success"><b>A reproduzir música {{ results }}!</b></div>
+        {% endif %}
+    </div>
+
+    <div class="container">
+        <h1>Top 10 - músicas mais ouvidas</h1>
+
+        <ul>
+            {% for musica in top10 %}
+                <li class="musica-item">
+                    <span class="musica-nome">{{ musica.musica }}</span> - <span class="musica-artista">{{ musica.artista }}</span>
+                    <form method="POST" action="{% url 'top10' %}">
+                        {% csrf_token %}
+                        
+                        <input type="hidden" name="music_id" value="{{ musica.id }}">
+                        <button type="submit" name="acao" value="reproduzir" class="reproduzir-button">
+                            Reproduzir
+                        </button>
+                    </form>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
+

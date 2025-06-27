@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-pt">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Musicfy - Login</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
+</head>
+
+<body>
+    <div class="brand">Musicfy</div>
+    <div class="container">
+        <h1>Bem vindo/a</h1>
+
+        <div class="messages">
+            {% if status == 'error' and errors %}
+                <div class="message error">{{ errors }}</div>
+            {% elif status == 'success' %}
+                <div class="message success">Login efetuado com sucesso!</div>
+            {% elif messages %}
+                {% for message in messages %}
+                    <div class="message {{ message.tags }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+
+        <form action="{% url 'login' %}" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="_method" value="PUT">
+
+            <div class="form-group">
+                <label for="username">Email:</label>
+                <input type="email" name="email" placeholder="Insira o email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" name="password" placeholder="Insira a password" required>
+            </div>
+            <button type="submit" class="btn">Login</button>
+        </form>
+        <div class="link">
+            <p>Não tem uma conta? <a href="/app/registo">Registe-se aqui</a>.</p>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-pt">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Musicfy</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/minhas_playlists.css' %}">
+</head>
+<body>
+    <div class="back-button">
+        <form method="POST" action="{% url 'index' %}">
+            {% csrf_token %}
+            <button type="submit" class="btn back-button-style">Voltar</button>
+        </form>
+    </div>
+
+    <div class="logout-button">
+        <form method="POST" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit" class="btn logout-button-style">Logout</button>
+        </form>
+    </div>
+
+    <div class="brand">Musicfy</div>
+    
+    <div class="messages">
+        {% if status == 'error' and errors %}
+            {% for error in errors %}
+                <div class="message error">{{ error }}</div>
+            {% endfor %}
+        {% elif status == 'success' %}
+            <div class="message success">{{ results }}</div>
+        {% endif %}
+    </div>
+
+    <div class="main-container">
+        <div class="container playlists-container">
+            <h1>Suas Playlists</h1>
+            <ul>
+                {% for pl in todas_playlists %}
+                    <li class="playlist-item">
+                        <a href="{% url 'minhas_playlists' %}?playlist_id={{ pl.playlist_id }}">
+                            {{ pl.nome }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        {% if modo_detalhes %}
+            <div id="detalhesContainer" class="container detalhes-container">
+                <div class="detalhes-header">
+                    <div>
+                        <h2>{{ playlist.nome }}</h2>
+                        <p>Data Criação: {{ playlist.data_criacao }}</p>
+                    </div>
+                    <form method="POST" action="{% url 'minhas_playlists' %}" class="button-group">
+                        {% csrf_token %}
+                        <!-- Envia o 'playlist_id' como input oculto -->
+                        <input type="hidden" name="playlist_id" value="{{ playlist.playlist_id }}">
+
+                        <button type="submit" name="acao" value="apagar" class="apagar-button">
+                            <img src="{% static 'img/apagar.png' %}" alt="Apagar" class="apagar-icon">
+                        </button>
+
+                        <button type="submit" name="acao" value="reproduzir" class="reproduzir-button">
+                            Reproduzir
+                        </button>
+                    </form>
+                </div>
+                <h3>Músicas</h3>
+                <ul>
+                    {% for musica in musicas %}
+                        <li class="musica-item">
+                            {{ musica.titulo }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>

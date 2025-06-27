@@ -1,0 +1,131 @@
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom right, rgb(255, 255, 255), rgb(128, 195, 249));
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    transform: translate(0px, -30px);
+}
+
+
+.brand {
+    font-size: 48px;
+    font-weight: bold;
+    color: #007BFF;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
+}
+
+
+.container {
+    width: 350px;
+    border-radius: 12px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    background: #ffffff;
+}
+
+
+.container h1 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+    margin-top: 5px;
+}
+
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+
+.form-group label {
+    font-size: 14px;
+    font-weight: bold;
+    color: #555;
+    display: block;
+    margin-bottom: 5px;
+}
+
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+
+.form-group input:focus {
+    border-color: #42a5f5;
+    outline: none;
+    box-shadow: 0 0 5px rgba(66, 165, 245, 0.4);
+}
+
+
+.btn {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+}
+
+
+.btn:hover {
+    background: #0056b3;
+}
+
+
+.link {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #333;
+}
+
+
+.link a {
+    color: #007BFF;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+
+.link a:hover {
+    text-decoration: underline;
+}
+
+
+.messages {
+    height: 20px;
+    margin-top: 10px; 
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+
+.error {
+    color: red;
+}
+
+
+.success {
+    color: green;
+}

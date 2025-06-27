@@ -1,0 +1,195 @@
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom right, rgb(255, 255, 255), rgb(128, 195, 249));
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.brand {
+    font-size: 48px;
+    font-weight: bold;
+    color: #007BFF;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    margin-bottom: 10px;
+    margin-top: 20px;
+}
+
+.container {
+    width: 380px;
+    height: 380px;
+    padding: 30px;
+    border-radius: 12px;
+    overflow-y: auto;
+    text-align: center;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    background: #ffffff;
+    margin-top: 20px;
+}
+
+.container::-webkit-scrollbar {
+    width: 15px;
+    border-radius: 12px;
+}
+
+
+.container::-webkit-scrollbar-track {
+    background: #f0f0f0; 
+    border-radius: 12px;
+}
+
+
+.container::-webkit-scrollbar-thumb {
+    background-color: #e0e0e0;
+    border: 2px solid #f0f0f0; 
+    border-radius: 12px;
+}
+
+
+.container::-webkit-scrollbar-thumb:hover {
+    background-color: rgb(216, 216, 216);
+}
+
+.container h1 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+    margin-top: 5px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.musica-item {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+.musica-item:hover {
+    background-color: #e0e0e0;
+}
+
+.musica-nome {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+
+.musica-artista {
+    font-size: 14px;
+    color: #777;
+}
+
+
+.btn {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+}
+
+
+.btn:hover {
+    background: #0056b3;
+}
+
+
+.back-button {
+    position: absolute;
+    top: 20px;
+    left: 2.5%;
+}
+
+
+.back-button-style {
+    font-size: 16px;
+    padding: 10px 20px;
+}
+
+
+.logout-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+
+.logout-button-style {
+    background: #dc3545;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+
+.logout-button-style:hover {
+    background: #c82333;
+}
+
+
+.reproduzir-button {
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+    background: #28a745;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+.reproduzir-button:hover {
+    background: #218838;
+    transform: translateY(-2px);
+}
+
+
+.messages {
+    margin-top: 20px;
+    text-align: left;
+}
+
+
+.message {
+    font-size: 20px;
+}
+
+
+.message.error {
+    color: red;
+}
+
+
+.message.success {
+    color: green;
+}
