@@ -1,17 +1,6 @@
 # Projeto BDAI
 
-Plataforma web de streaming e gestão de música desenvolvida em Django + PostgreSQL no contexto da unidade curricular Bases de Dados e Aplicações Inteligentes (BDAI) – 2024.
-
----
-
-## 📑 Sumário
-
-1. [Sobre o projeto](#sobre-o-projeto)
-4. [Instalação](#instalação)
-5. [Utilização](#utilização)
-6. [Estrutura de pastas](#estrutura-de-pastas)
-7. [Contribuição](#contribuição)
-8. [Licença](#licença)
+Plataforma web de gestão de música desenvolvida em Django + PostgreSQL no contexto da unidade curricular Bases de Dados e Aplicações Inteligentes (BDAI) – 2024.
 
 ---
 
