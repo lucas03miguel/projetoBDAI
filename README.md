@@ -31,12 +31,6 @@ Funcionalidades de alto nível:
 
 ## Instalação
 
-### Pré‑requisitos
-
-* Python 3.12
-* PostgreSQL (role/password **postgres/postgres** por defeito — ou configure via *env*)
-* `git` + `make` (opcional)
-
 ### Passo‑a‑passo
 
 ```bash
@@ -49,6 +43,7 @@ python manage.py migrate
 # Servidor
 python manage.py runserver
 ```
+> A parte da base de dados não está aqui demonstrada, pelo que nao é possível testar a aplicação. Será corrigido em breve
 
 Navegue para <http://127.0.0.1:8000/> e explore!
 
