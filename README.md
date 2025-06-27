@@ -18,11 +18,11 @@ Funcionalidades de alto nível:
 | Módulo | Descrição rápida |
 |--------|------------------|
 | Autenticação | Registo de utilizadores, sessão e _logout_ seguro |
-| Administração | CRUD de artistas e validação de dados |
+| Administração | Criação de artistas |
 | Música & Álbuns | Upload, associação de _features_ e agrupamento em álbuns |
 | Playlists | Criação, reprodução e eliminação de playlists |
-| Top 10 pessoal | Histórico de escutas e _ranking_ das músicas favoritas |
-| Pesquisa global | Busca por artistas, músicas, playlists e álbuns |
+| Top 10 pessoal | Histórico de visualizações |
+| Pesquisa global | Pesquisa por artistas, músicas, playlists e álbuns |
 
 > Documentação complementar nos PDFs `Relatório_BDAI.pdf` (relatório) e `2024‑BD‑projectV2.pdf` (enunciado).
 
