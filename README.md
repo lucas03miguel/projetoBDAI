@@ -43,7 +43,7 @@ python manage.py migrate
 # Servidor
 python manage.py runserver
 ```
-> A parte da base de dados não está aqui demonstrada, pelo que nao é possível testar a aplicação. Será corrigido em breve
+> A parte da base de dados não está aqui implementada, pelo que nao é possível testar a aplicação. Será corrigido em breve
 
 Navegue para <http://127.0.0.1:8000/> e explore!
 
